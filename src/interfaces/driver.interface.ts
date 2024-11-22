@@ -6,3 +6,7 @@ export interface Driver {
     review: object,
     value: number
 }
+
+export interface IDriverRepository {
+    findAll(): Promise<Driver[]>;
+}
