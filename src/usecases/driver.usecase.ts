@@ -1,7 +1,7 @@
 import { Driver } from "../interfaces/driver.interface";
 import DriverRepository from "../repositories/driver.repository";
 
-class DriverUseCase {
+export default class DriverUseCase {
     private driverRepository: DriverRepository
     constructor() {
         this.driverRepository = new DriverRepository();
