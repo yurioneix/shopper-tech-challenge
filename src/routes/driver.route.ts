@@ -18,5 +18,6 @@ export async function driverRoutes(fastify: FastifyInstance) {
 
     fastify.get('/', (req, reply) => {
         const drivers = driverUseCase.findAllDrivers();
+        return drivers;
     })
 }
