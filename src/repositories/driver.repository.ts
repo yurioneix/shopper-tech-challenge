@@ -1,8 +1,10 @@
+import { prisma } from "../database/prisma-client";
 import { Driver, IDriverRepository } from "../interfaces/driver.interface";
 
 export default class DriverRepository implements IDriverRepository{
-    findAll(): Promise<Driver[]> {
-        throw new Error("Method not implemented.");
+    async findAll(): Promise<Driver[]> {
+        const drivers = await prisma.driver.findMany();
+        return drivers;
     }
 
 }
