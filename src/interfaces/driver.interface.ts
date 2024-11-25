@@ -3,7 +3,7 @@ export interface Driver {
     name: string,
     description: string,
     vehicle: string,
-    review: object,
+    review: string,
     value: number
 }
 
