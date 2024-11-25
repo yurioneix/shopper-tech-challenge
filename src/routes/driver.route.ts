@@ -1,10 +1,11 @@
 import { FastifyInstance } from "fastify";
 import DriverUseCase from "../usecases/driver.usecase";
+import { User } from "../interfaces/user.interface";
 
-export function driverRoutes(fastify: FastifyInstance) {
+export async function driverRoutes(fastify: FastifyInstance) {
     const driverUseCase = new DriverUseCase();
 
-    fastify.post('/ride/estimate', (req, reply) => {
+    fastify.post<{Body: User }>('/ride/estimate', (req, reply) => {
 
         const { customerId, origin, destination } = req.body;
 
@@ -13,5 +14,9 @@ export function driverRoutes(fastify: FastifyInstance) {
         } catch (error) {
             reply.send(error);
         }
+    });
+
+    fastify.get('/', (req, reply) => {
+        const drivers = driverUseCase.findAllDrivers();
     })
 }
