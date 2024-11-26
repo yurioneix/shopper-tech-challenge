@@ -18,3 +18,14 @@ model Driver {
 
   @@map("drivers")
 }
+
+model Ride {
+  customerId  Int    @id @default(autoincrement())
+  origin      String
+  destination String
+  distance    Int
+  driver      String
+  value       Int
+
+  @@map("rides")
+}
