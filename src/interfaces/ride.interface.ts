@@ -9,5 +9,5 @@ export interface Ride {
 }
 
 export interface IRideRepository {
-    create(ride: Ride): Promise<void>;
+    create(ride: Ride): Promise<Ride>;
 }
