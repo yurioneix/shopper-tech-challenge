@@ -26,6 +26,7 @@ model Ride {
   distance    Int
   driver      String
   value       Int
+  duration    String
 
   @@map("rides")
 }
