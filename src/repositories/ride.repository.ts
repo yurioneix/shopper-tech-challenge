@@ -36,4 +36,29 @@ export class RideRepository implements IRideRepository {
             value: newRide.value,
         };
     }
+
+    async getRidesByCustomerId(customerId: number, driverId?: number): Promise<BodyRide[]> {
+        const getRides = await prisma.ride.findMany({
+            where: {
+                customerId: customerId, ...(driverId && { driverId: driverId })
+            },
+            include: { driver: true },
+            orderBy: {
+                date: "desc"
+            }
+        });
+
+        return getRides.map((ride) => ({
+            customerId: String(ride.customerId),
+            origin: ride.origin,
+            destination: ride.destination,
+            distance: ride.distance,
+            duration: ride.duration,
+            driver: {
+                id: ride.driver.id,
+                name: ride.driver.name,
+            },
+            value: ride.value,
+        }));
+    }
 }
