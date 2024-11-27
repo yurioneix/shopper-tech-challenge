@@ -1,4 +1,4 @@
-import { Driver } from "../interfaces/driver.interface";
+import { AllFieldsDriver, Driver } from "../interfaces/driver.interface";
 import DriverRepository from "../repositories/driver.repository";
 
 export default class DriverUseCase {
@@ -7,7 +7,7 @@ export default class DriverUseCase {
         this.driverRepository = new DriverRepository();
     }
 
-    async findAllDrivers(): Promise<Driver[]> {
+    async findAllDrivers(): Promise<AllFieldsDriver[]> {
         const drivers = this.driverRepository.findAll();
 
         return drivers;
