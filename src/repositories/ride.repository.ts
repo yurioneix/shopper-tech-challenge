@@ -6,7 +6,7 @@ export class RideRepository implements IRideRepository {
         const newRide = await prisma.ride.create({
             data: {
                customer: {
-                connect: { id: Number(ride.customerId) },
+                connect: { customer_id: Number(ride.customerId) },
                },
                driver: {
                 connect: { id: ride.driver.id }
