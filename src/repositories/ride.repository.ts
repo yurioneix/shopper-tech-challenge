@@ -1,5 +1,5 @@
 import { prisma } from "../database/prisma-client";
-import { Ride, IRideRepository, BodyRide } from "../interfaces/ride.interface";
+import { Ride, IRideRepository, BodyRide, RideComplete } from "../interfaces/ride.interface";
 
 export class RideRepository implements IRideRepository {
     async create(ride: BodyRide): Promise<BodyRide> {
@@ -37,19 +37,36 @@ export class RideRepository implements IRideRepository {
         };
     }
 
-    async getRidesByCustomerId(customerId: number, driverId?: number): Promise<BodyRide[]> {
+    async getRidesByCustomerId(customerId: number, driverId?: number): Promise<RideComplete[]> {
         const getRides = await prisma.ride.findMany({
             where: {
                 customerId: customerId, ...(driverId && { driverId: driverId })
             },
-            include: { driver: true },
+            select: {
+                id: true,
+                customerId: true,
+                date: true,
+                origin: true,
+                destination: true,
+                distance: true,
+                duration: true,
+                value: true,
+                driver: {
+                    select: {
+                        id: true,
+                        name: true,
+                    },
+                },
+            },
             orderBy: {
                 date: "desc"
             }
         });
 
         return getRides.map((ride) => ({
+            id: ride.id,
             customerId: String(ride.customerId),
+            date: ride.date,
             origin: ride.origin,
             destination: ride.destination,
             distance: ride.distance,
