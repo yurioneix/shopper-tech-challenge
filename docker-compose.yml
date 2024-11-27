@@ -2,7 +2,7 @@ version: '3'
 services:
   frontend:
     build:
-      context: ./frontend  # Caminho do Dockerfile do frontend
+      context: ./frontend/shopper-teste  # Caminho do Dockerfile do frontend
     ports:
       - "3000:80"  # A porta 80 do container será mapeada para a porta 80 da máquina local
     depends_on:
