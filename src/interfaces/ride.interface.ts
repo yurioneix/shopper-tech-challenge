@@ -1,12 +1,10 @@
-import { JsonValue } from "@prisma/client/runtime/library";
-
 export interface Ride { 
-    customerId: string,
+    customerId: number,
     origin: string,
     destination: string,
     distance: number,
     duration: string,
-    driver: string,
+    driver: number,
     value: number
 }
 
@@ -20,6 +18,21 @@ export interface BodyRide {
     value: number
 }
 
+export interface RideComplete { 
+    id: number,
+    date: Date,
+    customerId: string,
+    origin: string,
+    destination: string,
+    distance: number,
+    duration: string,
+    value: number,
+    driver: {
+        id: number,
+        name: string,
+    },
+}
+
 export interface IRideRepository {
-    create(ride: Ride): Promise<Ride>;
+    create(ride: BodyRide): Promise<BodyRide>;
 }
