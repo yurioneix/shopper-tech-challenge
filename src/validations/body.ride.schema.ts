@@ -2,7 +2,7 @@ export const bodyRideSchema = {
     type: "object",
     required: ["customerId", "origin", "destination", "distance", "driver", "value"],
     properties: {
-        customerId: { type: "number" },
+        customerId: { type: "string" },
         origin: { type: "string" },
         destination: { type: "string" },
         distance: { type: "number" },
