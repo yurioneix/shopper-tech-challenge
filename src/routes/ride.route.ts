@@ -26,13 +26,13 @@ export async function rideRoutes(fastify: FastifyInstance) {
     },
     async (req, reply) => {
         const { 
-            customerId,
-            origin,
-            destination,
+            // customerId,
+            // origin,
+            // destination,
             distance,
-            duration,
+            // duration,
             driver,
-            value
+            // value
          } = req.body;
 
          const drivers = await driverUseCase.findAllDrivers();
@@ -55,17 +55,17 @@ export async function rideRoutes(fastify: FastifyInstance) {
                 })
         }
 
-         const ride = {
-            customerId,
-            origin,
-            destination,
-            distance,
-            duration,
-            driver: JSON.stringify(driver),
-            value
-         }
+        //  const ride = {
+        //     customerId,
+        //     origin,
+        //     destination,
+        //     distance,
+        //     duration,
+        //     driver: JSON.stringify(driver),
+        //     value
+        //  }
 
-        const newRide = await rideUseCase.createRide(ride);
+        const newRide = await rideUseCase.createRide(req.body);
         
         if (newRide) {
             return reply.status(200).send({
