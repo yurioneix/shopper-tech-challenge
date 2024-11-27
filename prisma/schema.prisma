@@ -7,6 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Customer {
+  id    Int    @id @default(autoincrement())
+  name  String
+  rides Ride[]
+
+  @@map("customers")
+}
+
 model Driver {
   id          Int    @id @default(autoincrement())
   name        String
@@ -15,18 +23,22 @@ model Driver {
   review      String
   value       Int
   minimumKm   Int
+  rides       Ride[]
 
   @@map("drivers")
 }
 
 model Ride {
-  customerId  String @id
   origin      String
   destination String
   distance    Int
   value       Int
   duration    String
-  driver      String
+  driverId    Int
+  id          Int      @id @default(autoincrement())
+  customerId  Int
+  customer    Customer @relation(fields: [customerId], references: [id])
+  driver      Driver   @relation(fields: [driverId], references: [id])
 
   @@map("rides")
 }
