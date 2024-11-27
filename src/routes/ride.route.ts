@@ -1,16 +1,14 @@
 import { FastifyInstance } from "fastify";
 import { RideUseCase } from "../usecases/ride.usecase";
 import { Ride } from "../interfaces/ride.interface";
-import { bodySchema } from "../validations/body.schema";
-import { JsonValue } from "@prisma/client/runtime/library";
-
+import { bodyRideSchema } from "../validations/body.ride.schema";
 
 export async function rideRoutes(fastify: FastifyInstance) {
     const rideUseCase = new RideUseCase();
 
     fastify.patch<{Body: Ride}>('/confirm', {
         schema: {
-            body: bodySchema,
+            body: bodyRideSchema,
         },
         preValidation: async (req, reply) => {
             // "driver": {
