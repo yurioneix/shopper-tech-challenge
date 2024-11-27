@@ -1,4 +1,4 @@
-export interface User { 
+export interface Customer { 
     customerId: string,
     origin: string,
     destination: string

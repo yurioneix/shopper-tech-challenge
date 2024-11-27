@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 import DriverUseCase from "../usecases/driver.usecase";
-import { User } from "../interfaces/user.interface";
+import { Customer } from "../interfaces/customer.interface";
 import { bodyDriverSchema } from "../validations/body.driver.schema";
 import getRoute from "../utils/apiRoutes";
 import { parseLatLng } from "../utils/parseStringToLatLong";
@@ -8,7 +8,7 @@ import { parseLatLng } from "../utils/parseStringToLatLong";
 export async function driverRoutes(fastify: FastifyInstance) {
     const driverUseCase = new DriverUseCase();
 
-    fastify.post<{Body: User }>('/estimate', {
+    fastify.post<{Body: Customer }>('/estimate', {
         schema: {
             body: bodyDriverSchema,
         },
