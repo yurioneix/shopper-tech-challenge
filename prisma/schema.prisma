@@ -8,9 +8,10 @@ datasource db {
 }
 
 model Customer {
-  id    Int    @id @default(autoincrement())
-  name  String
-  rides Ride[]
+  id          Int    @id @default(autoincrement())
+  destination String
+  origin      String
+  rides       Ride[]
 
   @@map("customers")
 }
