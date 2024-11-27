@@ -1,4 +1,4 @@
-export const bodySchema = {
+export const bodyDriverSchema = {
     type: 'object',
     required: ['customerId', 'origin', 'destination'],
     properties: {
