@@ -5,15 +5,11 @@ import { rideRoutes } from "./routes/ride.route";
 const app: FastifyInstance = fastify({logger: true});
 
 app.register(driverRoutes, {
-    prefix: '/'
-});
-
-app.register(driverRoutes, {
-    prefix: '/ride/estimate',
+    prefix: '/ride',
 });
 
 app.register(rideRoutes, {
-    prefix: '/ride/confirm',
+    prefix: '/ride',
 })
 
 app.listen({
