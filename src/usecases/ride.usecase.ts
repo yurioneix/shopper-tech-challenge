@@ -1,5 +1,5 @@
 import { Ride } from "../interfaces/ride.interface";
-import { RideRepository } from "../repositories/rider.repository";
+import { RideRepository } from "../repositories/ride.repository";
 
 export class RideUseCase {
     private rideRepository: RideRepository;
