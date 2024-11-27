@@ -3,3 +3,7 @@ export interface Customer {
     origin: string,
     destination: string
 }
+
+export interface ICustomerRepository {
+    create(customer: Customer): Promise<Customer>;
+}
