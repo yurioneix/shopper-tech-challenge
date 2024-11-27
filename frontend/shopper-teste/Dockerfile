@@ -1,17 +1,15 @@
-# Escolha a imagem base 
-FROM node:18
+FROM node:18-alpine
 
-# Defina o diretório de trabalho
 WORKDIR /app
 
-# Copie os arquivos do projeto
-COPY . .
+COPY package.json package-lock.json ./
 
-# Instale as dependências
 RUN npm install
 
-# Exponha a porta do frontend
-EXPOSE 80
+COPY . .
 
-# Comando para rodar o servidor
-CMD ["npm", "run", "start"]
+RUN npm run build
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
