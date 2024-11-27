@@ -13,12 +13,7 @@ export async function rideRoutes(fastify: FastifyInstance) {
             body: bodyRideSchema,
         },
         preValidation: async (req, reply) => {
-            // "driver": {
-                // "id": number,
-                // "name": string
-            // },
-            // driver
-            const { origin, destination, distance, driver } = req.body;
+            const { origin, destination } = req.body;
              
 
             if (origin === destination) {
@@ -42,12 +37,21 @@ export async function rideRoutes(fastify: FastifyInstance) {
 
          const drivers = await driverUseCase.findAllDrivers();
 
-         const findValidDriver = drivers.find((element) => element.id === parseInt(driver.id));
+         const findValidDriver = drivers.find((element) => element.id === driver.id);
 
         if (findValidDriver === undefined) {
             return reply.status(404).send({
                 error_code: "DRIVER_NOT_FOUND",
                 error_description: "Motorista não encontrado"
+                })
+        }
+
+        const checkMinimumRideDistance = distance >= findValidDriver.minimumKm;
+
+        if (!checkMinimumRideDistance) {
+            return reply.status(406).send({
+                error_code: "INVALID_DISTANCE",
+                error_description: "Quilometragem inválida para o motorista"
                 })
         }
 
