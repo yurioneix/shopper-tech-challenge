@@ -1,12 +1,14 @@
 import { FastifyInstance } from "fastify";
 import { RideUseCase } from "../usecases/ride.usecase";
-import { Ride } from "../interfaces/ride.interface";
+import { BodyRide } from "../interfaces/ride.interface";
 import { bodyRideSchema } from "../validations/body.ride.schema";
+import DriverUseCase from "../usecases/driver.usecase";
 
 export async function rideRoutes(fastify: FastifyInstance) {
     const rideUseCase = new RideUseCase();
+    const driverUseCase = new DriverUseCase();
 
-    fastify.patch<{Body: Ride}>('/confirm', {
+    fastify.patch<{Body: BodyRide}>('/confirm', {
         schema: {
             body: bodyRideSchema,
         },
@@ -37,6 +39,17 @@ export async function rideRoutes(fastify: FastifyInstance) {
             driver,
             value
          } = req.body;
+
+         const drivers = await driverUseCase.findAllDrivers();
+
+         const findValidDriver = drivers.find((element) => element.id === parseInt(driver.id));
+
+        if (findValidDriver === undefined) {
+            return reply.status(404).send({
+                error_code: "DRIVER_NOT_FOUND",
+                error_description: "Motorista não encontrado"
+                })
+        }
 
          const ride = {
             customerId,
