@@ -1,5 +1,7 @@
+import { JsonValue } from "@prisma/client/runtime/library";
+
 export interface Ride { 
-    customerId: number,
+    customerId: string,
     origin: string,
     destination: string,
     distance: number,
