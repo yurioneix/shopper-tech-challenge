@@ -8,7 +8,7 @@ import { parseLatLng } from "../utils/parseStringToLatLong";
 export async function driverRoutes(fastify: FastifyInstance) {
     const driverUseCase = new DriverUseCase();
 
-    fastify.post<{Body: User }>('/ride/estimate', {
+    fastify.post<{Body: User }>('/estimate', {
         schema: {
             body: bodySchema,
         },
@@ -58,7 +58,7 @@ export async function driverRoutes(fastify: FastifyInstance) {
 
     });
 
-    fastify.get('/', (req, reply) => {
+    fastify.get('/drivers', (req, reply) => {
         const drivers = driverUseCase.findAllDrivers();
         return drivers; 
     });
