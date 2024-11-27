@@ -4,9 +4,11 @@ import { Customer } from "../interfaces/customer.interface";
 import { bodyDriverSchema } from "../validations/body.driver.schema";
 import getRoute from "../utils/apiRoutes";
 import { parseLatLng } from "../utils/parseStringToLatLong";
+import { CustomerUseCase } from "../usecases/customer.usecase";
 
 export async function driverRoutes(fastify: FastifyInstance) {
     const driverUseCase = new DriverUseCase();
+    const customerUseCase = new CustomerUseCase();
 
     fastify.post<{Body: Customer }>('/estimate', {
         schema: {
@@ -25,6 +27,8 @@ export async function driverRoutes(fastify: FastifyInstance) {
     },
     async (req, reply) => {
         const { origin, destination } = req.body;
+
+        customerUseCase.createCustomer(req.body);
 
         const drivers = await driverUseCase.findAllDrivers();
         const changeReviewDrivers = drivers.map(driver => {
