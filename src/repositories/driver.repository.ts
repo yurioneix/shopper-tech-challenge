@@ -1,8 +1,8 @@
 import { prisma } from "../database/prisma-client";
-import { Driver, IDriverRepository } from "../interfaces/driver.interface";
+import { AllFieldsDriver, Driver, IDriverRepository } from "../interfaces/driver.interface";
 
 export default class DriverRepository implements IDriverRepository{
-    async findAll(): Promise<Driver[]> {
+    async findAll(): Promise<AllFieldsDriver[]> {
         const drivers = await prisma.driver.findMany({
             select: {
                 id: true,
@@ -10,7 +10,8 @@ export default class DriverRepository implements IDriverRepository{
                 description: true,
                 vehicle: true,
                 review: true,
-                value: true
+                value: true,
+                minimumKm: true
             }
         });
         return drivers;
