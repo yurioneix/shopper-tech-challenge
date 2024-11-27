@@ -16,7 +16,7 @@ export interface BodyRide {
     destination: string,
     distance: number,
     duration: string,
-    driver: { id: string, name: string },
+    driver: { id: number, name: string },
     value: number
 }
 
