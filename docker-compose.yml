@@ -5,6 +5,9 @@ services:
     ports:
       - "80:3000"  # A porta 80 do container será mapeada para a porta 80 da máquina local
       - "3000:3000"  # Também mapeia diretamente a porta 3000 para o host
+    volumes:
+    - ./frontend/shopper-teste:/app
+    command: npm run dev
     depends_on:
       - backend  # O frontend depende do backend estar rodando
 
