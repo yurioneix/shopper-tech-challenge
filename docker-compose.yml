@@ -1,0 +1,32 @@
+services:
+  frontend:
+    build:
+      context: ./frontend/shopper-teste  # Caminho do Dockerfile do frontend
+    ports:
+      - "80:3000"  # A porta 80 do container será mapeada para a porta 80 da máquina local
+      - "3000:3000"  # Também mapeia diretamente a porta 3000 para o host
+    depends_on:
+      - backend  # O frontend depende do backend estar rodando
+
+  backend:
+    build:
+      context: ./backend  # Caminho do Dockerfile do backend
+    ports:
+      - "8080:8080"  # A porta 8080 do container será mapeada para a porta 8080 da máquina local
+    environment:
+      -  DATABASE_URL= DATABASE_URL # Configuração do banco de dados
+    depends_on:
+      - db  # O backend depende do banco de dados estar rodando
+
+  db:
+    image: postgres:14  # Imagem do PostgreSQL
+    environment:
+      POSTGRES_USER: POSTGRES_USER  # Nome de usuário do banco de dados
+      POSTGRES_PASSWORD: POSTGRES_PASSWORD  # Senha do banco de dados
+      POSTGRES_DB: POSTGRES_DB  # Nome do banco de dados a ser criado
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persistência dos dados do banco de dados
+
+volumes:
+  postgres_data:
+    driver: local

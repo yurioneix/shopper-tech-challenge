@@ -3,28 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
-  "prisma": {
-    "seed": "node --loader ts-node/esm prisma/seed.ts"
-  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx watch src/server.ts"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yurioneix/shopper-tech-challenge.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^22.9.1",
-    "axios": "^1.7.7",
-    "dotenv": "^16.4.5",
-    "prisma": "^5.22.0",
-    "tsx": "^4.19.2",
-    "typescript": "^5.6.3"
+  "bugs": {
+    "url": "https://github.com/yurioneix/shopper-tech-challenge/issues"
   },
-  "dependencies": {
-    "@prisma/client": "^5.22.0",
-    "fastify": "^4.28.1",
-    "ts-node": "^10.9.2"
-  }
+  "homepage": "https://github.com/yurioneix/shopper-tech-challenge#readme"
 }
